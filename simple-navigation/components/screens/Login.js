@@ -13,7 +13,7 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: ""
     };
   }
@@ -30,16 +30,14 @@ export default class Login extends React.Component {
   };
 
   login = () => {
-    alert(this.state.username);
-
-    fetch("http://192.168.15.19:5000/login", {
+    fetch("http://192.168.15.19:4000/login", {
       method: "post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        username: this.state.username,
+        email: this.state.email,
         password: this.state.password
       })
     })
@@ -61,13 +59,15 @@ export default class Login extends React.Component {
         <View styles={styles.container}>
           <Text style={styles.header}>- LOGIN -</Text>
 
+          <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.textInput}
-            placeholder="Username"
-            onChangeText={username => this.setState({ username })}
+            placeholder="Email"
+            onChangeText={email => this.setState({ email })}
             underlineColorAndroid="transparent"
           />
 
+          <Text style={styles.label}>Password</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Password"
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   header: {
     textAlign: "center",
-    fontSize: 24,
+    fontSize: 30,
     marginBottom: 60,
     color: "#fff",
     fontWeight: "bold"
@@ -117,6 +117,13 @@ const styles = StyleSheet.create({
     marginHorizontal: "2%",
     backgroundColor: "#fff",
     borderRadius: 40
+  },
+  label: {
+    marginTop: 10,
+    marginLeft: "6%",
+    color: "white",
+    fontSize: 15,
+    marginBottom: 2
   },
   btn: {
     alignSelf: "stretch",

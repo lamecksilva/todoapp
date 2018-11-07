@@ -6,7 +6,7 @@ export default class Profile extends React.Component {
   render() {
     return (
       <View styles={styles.container}>
-        <Text style={styles.header}>Bem vindo, user</Text>
+        <Text style={styles.header}>Bem vindo</Text>
       </View>
     );
   }

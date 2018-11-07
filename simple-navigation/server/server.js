@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const users = require("./api/users");
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -15,6 +16,6 @@ mongoose
   .catch(err => console.log(err));
 
 app.use("/", users);
-const port = 5000;
+const port = 4000;
 
 app.listen(port, () => console.log(`Server running in ${port}`));

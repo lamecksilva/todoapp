@@ -6,7 +6,8 @@ import {
   KeyboardAvoidingView,
   TextInput,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 
 export default class Register extends Component {
@@ -21,6 +22,37 @@ export default class Register extends Component {
       cpf: ""
     };
   }
+
+  registrar = () => {
+    fetch("http://192.168.15.19:4000/register", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nome: this.state.username,
+        email: this.state.email,
+        senha: this.state.password,
+        cpf: this.state.cpf,
+        cep: 123
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success === true) {
+          Alert.alert("Registrado com sucesso", [
+            {
+              text: "Login",
+              onPress: () => console.log("Login button alert pressed")
+            }
+          ]);
+          this.props.navigation.navigate("Home");
+        } else {
+          alert(res.message);
+        }
+      });
+  };
 
   render() {
     return (
@@ -58,6 +90,7 @@ export default class Register extends Component {
             placeholder="Password"
             onChangeText={password => this.setState({ password })}
             underlineColorAndroid="transparent"
+            secureTextEntry={true}
           />
 
           <Text style={styles.label}>Confirm your password</Text>
@@ -66,9 +99,10 @@ export default class Register extends Component {
             placeholder="Confirm Password"
             onChangeText={password2 => this.setState({ password2 })}
             underlineColorAndroid="transparent"
+            secureTextEntry={true}
           />
 
-          <TouchableOpacity style={styles.regBtn}>
+          <TouchableOpacity style={styles.regBtn} onPress={this.registrar}>
             <Text>Register</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -89,7 +123,8 @@ const styles = StyleSheet.create({
     marginTop: "10%",
     textAlign: "center",
     color: "#fff",
-    marginBottom: "10%"
+    marginBottom: "10%",
+    fontSize: 30
   },
   label: {
     marginTop: 10,
@@ -101,7 +136,7 @@ const styles = StyleSheet.create({
   textInput: {
     alignSelf: "stretch",
     padding: 10,
-    marginBottom: 20,
+    marginBottom: 7,
     marginHorizontal: "2%",
     backgroundColor: "#fff",
     borderRadius: 40
@@ -113,6 +148,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 40,
     maxWidth: "90%",
-    marginHorizontal: "10%"
+    marginHorizontal: "10%",
+    marginTop: "4%"
   }
 });
