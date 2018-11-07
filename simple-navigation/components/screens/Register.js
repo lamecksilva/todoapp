@@ -4,7 +4,9 @@ import {
   View,
   StyleSheet,
   KeyboardAvoidingView,
-  TextInput
+  TextInput,
+  ScrollView,
+  TouchableOpacity
 } from "react-native";
 
 export default class Register extends Component {
@@ -22,8 +24,8 @@ export default class Register extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.wrapper}>
-        <View style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
+        <ScrollView style={styles.container}>
           <Text style={styles.header}>- REGISTER -</Text>
 
           <Text style={styles.label}>UserName</Text>
@@ -34,7 +36,7 @@ export default class Register extends Component {
             underlineColorAndroid="transparent"
           />
 
-          <Text style={styles.label}>UserName</Text>
+          <Text style={styles.label}>CPF</Text>
           <TextInput
             style={styles.textInput}
             placeholder="CPF"
@@ -42,7 +44,7 @@ export default class Register extends Component {
             underlineColorAndroid="transparent"
           />
 
-          <Text style={styles.label}>UserName</Text>
+          <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Email"
@@ -50,7 +52,7 @@ export default class Register extends Component {
             underlineColorAndroid="transparent"
           />
 
-          <Text style={styles.label}>UserName</Text>
+          <Text style={styles.label}>Password</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Password"
@@ -58,14 +60,18 @@ export default class Register extends Component {
             underlineColorAndroid="transparent"
           />
 
-          <Text style={styles.label}>UserName</Text>
+          <Text style={styles.label}>Confirm your password</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Confirm Password"
             onChangeText={password2 => this.setState({ password2 })}
             underlineColorAndroid="transparent"
           />
-        </View>
+
+          <TouchableOpacity style={styles.regBtn}>
+            <Text>Register</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </KeyboardAvoidingView>
     );
   }
@@ -87,14 +93,26 @@ const styles = StyleSheet.create({
   },
   label: {
     marginTop: 10,
-    marginLeft: "2%"
+    marginLeft: "4%",
+    color: "white",
+    fontSize: 15,
+    marginBottom: 2
   },
   textInput: {
     alignSelf: "stretch",
-    padding: 16,
+    padding: 10,
     marginBottom: 20,
     marginHorizontal: "2%",
     backgroundColor: "#fff",
     borderRadius: 40
+  },
+  regBtn: {
+    alignSelf: "stretch",
+    backgroundColor: "#01c853",
+    padding: 15,
+    alignItems: "center",
+    borderRadius: 40,
+    maxWidth: "90%",
+    marginHorizontal: "10%"
   }
 });
