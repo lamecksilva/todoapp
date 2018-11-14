@@ -14,13 +14,13 @@ import ImagePicker from "react-native-image-picker";
 export default class App extends React.Component {
   state = {
     avatarSource: null,
-    videoSource: null
+    videoSource: null,
+    avatartxt: null
   };
 
   selectPhotoTapped() {
     const options = {
       title: "Select Avatar",
-      customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
       storageOptions: {
         skipBackup: true,
         path: "images"
@@ -37,10 +37,7 @@ export default class App extends React.Component {
       } else if (response.customButton) {
         console.log("User tapped custom button: ", response.customButton);
       } else {
-        const source = { uri: response.uri };
-
-        // You can also display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+        const source = { uri: "data:image/jpeg;base64," + response.data };
 
         this.setState({
           avatarSource: source
@@ -67,6 +64,12 @@ export default class App extends React.Component {
             )}
           </View>
         </TouchableOpacity>
+
+        {this.state.avatartxt === null ? (
+          <Text>haha nada aqui </Text>
+        ) : (
+          <Text>{this.state.avatartxt}</Text>
+        )}
       </View>
     );
   }
