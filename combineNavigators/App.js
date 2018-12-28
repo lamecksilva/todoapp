@@ -163,7 +163,7 @@ class Settings extends Component {
         </Content>
       </Container>
     );
-  }
+  } // email: lorenzocaio@temet.com, senha: 123456 }
 }
 
 class Profile extends Component {
