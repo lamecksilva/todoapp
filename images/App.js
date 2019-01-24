@@ -16,7 +16,8 @@ import RNFetchBlob from "rn-fetch-blob";
 export default class App extends React.Component {
   state = {
     avatarSource: null,
-    data: null
+    data: null,
+    id: 10
   };
 
   selectPhotoTapped() {
@@ -51,16 +52,16 @@ export default class App extends React.Component {
   uploadPhoto = () => {
     RNFetchBlob.fetch(
       "POST",
-      "http://192.168.15.16:8000/api/upload",
+      "http://apitatica.temet.com.br/api/upload",
       { "Content-Type": "multipart/form-data" },
       [
         {
-          name: "img_documentos",
+          name: "imagem",
           filename: "fotografia.jpeg",
           data: this.state.data
         },
-        { name: "tipo_documento", data: "1" },
-        { name: "cliente_id", data: "4" }
+        { name: "tipo_documento", data: "RG" },
+        { name: "cliente_id", data: this.state.id.toString() }
       ]
     )
       .then(res => console.log(res))
@@ -107,10 +108,10 @@ const styles = StyleSheet.create({
   },
   avatar: {
     borderRadius: 75,
-    width: 350,
-    height: 350
+    width: 250,
+    height: 250
   },
   btn: {
-    fontSize: 80
+    fontSize: 20
   }
 });
